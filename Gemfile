@@ -35,6 +35,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd'
+  # Generate class diagrams
+  gem 'railroady'
 end
 
 group :development do
