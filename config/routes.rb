@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   root to: "projects#index"
   
-  resources :arrows, except: [:create, :new, :edit, :update, :destroy]
+  resources :projects, except: [:show, :create, :new, :edit, :update, :destroy]
 end
