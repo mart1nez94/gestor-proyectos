@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-body">
+            <h5 class="card-title">MY PROJECTS</h5>
+        </div>
+    </div>
+    <div class="card-deck">
+        <% @projects.each do |project| %>
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><%= project.name %></h5>
+                <p class="card-text"><%= project.description %></p>
+                <% if project.status == 1 %>
+                <span class="card-text badge badge-primary">Developing</span>
+                <% elsif project.status == 2 %>
+                <span class="cart-text text-white badge badge-warning">Stand by</span>
+                <% else %>
+                <span class="card-text badge badge-success">Finished</span>
+                <% end %>
+                <p class="card-text"><small class="text-muted"><%= project.created_at %></small></p>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-dark btn-lg btn-block">Show project</button>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
