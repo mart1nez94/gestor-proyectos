@@ -1,13 +1,39 @@
-<%= "Welcome, #{current_user.email}" %>
-
-<div>
-    <h1>Projects</h1>
-    <% @projects.each do |project| %>
-    <div>
-        <span><%= project.name %></span><br />
-        <span><%= project.description %></span><br />
-        <span><%= project.status %></span><br />
-        <span><%= project.created_at %>
+<div class="container">
+    <div class="card-deck text-center">
+        <div class="card border-success mb-3">
+            <h4 class="card-header text-white bg-success mb-3">TASKS FOR TODAY</h4>
+            <div class="card-body">
+                0
+            </div>
+        </div>
+        <div class="card border-warning mb-3">
+            <h4 class="card-header text-white bg-warning mb-3">TASKS FOR TOMORROW</h4>
+            <div class="card-body">
+                0
+            </div>
+        </div>
+        <div class="card border-danger mb-3">
+            <h4 class="card-header text-white bg-danger mb-3">TASKS FOR THIS WEEK</h4>
+            <div class="card-body">
+                0
+            </div>
+        </div>
     </div>
-    <% end %>
+</div>
+<div class="container">
+    <div class="card border-dark mb-3">
+        <h4 class="card-header text-white bg-dark mb-3">PROJECTS</h4>
+        <div class="card-body">
+            <% @projects.each do |project| %>
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <span><%= project.name %></span><br />
+                    <span><%= project.description %></span><br />
+                    <span><%= project.status %></span><br />
+                    <span><%= project.created_at %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>
