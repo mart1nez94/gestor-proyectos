@@ -4,4 +4,8 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.projects_by_user(current_user.id)
   end
+
+  def show
+    
+  end
 end
