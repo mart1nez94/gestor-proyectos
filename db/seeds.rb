@@ -31,3 +31,14 @@ UserRelationship.create!( user_id: 2,
                           
 UserRelationship.create!( user_id: 1,
                           project_id: 4)
+
+
+50.times do |time|
+  Task.create!( project_id: 1, 
+                name: "Tarea ##{time}", 
+                description: "Descripcion de la Tarea ##{time}")
+
+  Task.create!( project_id: 4, 
+                name: "Tarea ##{time}", 
+                description: "Descripcion de la Tarea ##{time}")
+end
