@@ -20,17 +20,17 @@ Project.create!(name: "Proyecto #4",
                 description: "Descripcion del Proyecto #4",
                 status: 2)
                 
-UserRelationship.create!( user_id: 2,
-                          project_id: 1)
+ProjectRelationship.create!(user_id: 2,
+                            project_id: 1)
 
-UserRelationship.create!( user_id: 1,
-                          project_id: 2)
+ProjectRelationship.create!(user_id: 1,
+                            project_id: 2)
 
-UserRelationship.create!( user_id: 2,
-                          project_id: 3)
+ProjectRelationship.create!(user_id: 2,
+                            project_id: 3)
                           
-UserRelationship.create!( user_id: 1,
-                          project_id: 4)
+ProjectRelationship.create!(user_id: 1,
+                            project_id: 4)
 
 
 50.times do |time|
