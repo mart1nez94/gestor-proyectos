@@ -6,4 +6,8 @@ class Project < ApplicationRecord
     Project.all.joins(:project_relationships)
       .where(project_relationships: {user_id: user_id})
   end
+
+  def self.project_by_id(project_id)
+    Project.all.find_by(id: project_id)
+  end
 end

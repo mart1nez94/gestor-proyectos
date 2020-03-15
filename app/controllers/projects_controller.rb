@@ -6,6 +6,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    
+    @project = Project.project_by_id(params[:id])
   end
 end
