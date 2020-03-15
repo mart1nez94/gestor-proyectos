@@ -1,0 +1,13 @@
+<%= "Welcome, #{current_user.email}" %>
+
+<div>
+    <h1>Projects</h1>
+    <% @projects.each do |project| %>
+    <div>
+        <span><%= project.name %></span><br />
+        <span><%= project.description %></span><br />
+        <span><%= project.status %></span><br />
+        <span><%= project.created_at %>
+    </div>
+    <% end %>
+</div>
