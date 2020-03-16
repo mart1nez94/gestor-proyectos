@@ -36,9 +36,27 @@ ProjectRelationship.create!(user_id: 1,
 50.times do |time|
   Task.create!( project_id: 1, 
                 name: "Tarea ##{time}", 
-                description: "Descripcion de la Tarea ##{time}")
+                description: "Descripcion de la Tarea ##{time}",
+                status_id: 1)
+end
 
+5.times do |time|
   Task.create!( project_id: 4, 
                 name: "Tarea ##{time}", 
-                description: "Descripcion de la Tarea ##{time}")
+                description: "Descripcion de la Tarea ##{time}",
+                status_id: 1)
+end
+
+10.times do |time|
+  Task.create!( project_id: 4, 
+                name: "Tarea ##{time}", 
+                description: "Descripcion de la Tarea ##{time}",
+                status_id: 2)
+end
+
+20.times do |time|
+  Task.create!( project_id: 4, 
+                name: "Tarea ##{time}", 
+                description: "Descripcion de la Tarea ##{time}",
+                status_id: 3)
 end

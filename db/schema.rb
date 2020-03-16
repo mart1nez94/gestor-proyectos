@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_03_15_012126) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer "project_id"
+    t.integer "status_id"
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
