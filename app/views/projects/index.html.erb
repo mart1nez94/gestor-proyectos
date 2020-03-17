@@ -10,14 +10,14 @@
             <div class="card-body">
                 <h5 class="card-title"><%= project.name %></h5>
                 <p class="card-text"><%= project.description %></p>
-                <% if project.status == 1 %>
-                <span class="card-text badge badge-primary">Developing</span>
-                <% elsif project.status == 2 %>
-                <span class="cart-text text-white badge badge-warning">Stand by</span>
+                <% if project.project_status_id == 1 %>
+                <span class="card-text badge badge-danger">Stand-by</span>
+                <% elsif project.project_status_id == 2 %>
+                <span class="cart-text text-white badge badge-warning">Developing</span>
                 <% else %>
                 <span class="card-text badge badge-success">Finished</span>
                 <% end %>
-                <p class="card-text"><small class="text-muted"><%= project.created_at %></small></p>
+                <p class="card-text"><small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(project.updated_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small></p>
             </div>
             <div class="card-footer">
                 <button type="button" class="btn btn-dark btn-lg btn-block">Show project</button>

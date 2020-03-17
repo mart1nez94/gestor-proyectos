@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_012126) do
+ActiveRecord::Schema.define(version: 2020_03_17_072540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,16 +22,30 @@ ActiveRecord::Schema.define(version: 2020_03_15_012126) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "project_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "status"
+    t.integer "project_status_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "task_statuses", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "project_id"
+    t.integer "task_status_id"
+    t.integer "user_id"
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
