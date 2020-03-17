@@ -3,59 +3,60 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-board-tab" data-toggle="tab" href="#nav-board" role="tab" aria-controls="nav-board" aria-selected="true"><b>BOARD</b></a>
             <a class="nav-item nav-link" id="nav-information-tab" data-toggle="tab" href="#nav-information" role="tab" aria-controls="nav-information" aria-selected="false"><b>INFORMATION</b></a>
+            <a class="nav-item nav-link" id="nav-members-tab" data-toggle="tab" href="#nav-members" role="tab" aria-controls="nav-members" aria-selected="false"><b>MEMBERS</b></a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent"><br />
         <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#createTask">ADD NEW TASK</button><br />
         <div class="tab-pane fade show active" id="nav-board" role="tabpanel" aria-labelledby="nav-board-tab">
             <div class="card-deck">
-                <div class="card border-danger">
+                <div class="card border-danger" style="height: 100%">
                     <h4 class="card-header text-white bg-danger text-center">TO-DO</h4>
                     <div class="card-body">
                         <div class="list-group">
                             <% @tasks_to_do.each do |task| %>
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
                                     <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small>
-                            </a>
+                            </div>
                             <% end %>
                         </div>
                     </div>
                 </div>
-                <div class="card border-warning">
+                <div class="card border-warning" style="height: 100%">
                     <h4 class="card-header text-white bg-warning text-center">DOING</h4>
                     <div class="card-body">
                         <div class="list-group">
                             <% @tasks_doing.each do |task| %>
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
                                     <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small>
-                            </a>
+                            </div>
                             <% end %>
                         </div>
                     </div>
                 </div>
-                <div class="card border-success">
+                <div class="card border-success" style="height: 100%">
                     <h4 class="card-header text-white bg-success text-center">DONE</h4>
                     <div class="card-body">
                         <div class="list-group">
                             <% @tasks_done.each do |task| %>
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
-                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
+                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.updated_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small>
-                            </a>
+                            </div>
                             <% end %>
                         </div>
                     </div>
@@ -68,24 +69,24 @@
                 <div class="card-body">
                     <form>
                         <div class="form-group row">
-                            <label for="staticName" class="col-sm-2 col-form-label">Name:</label>
-                            <div class="col-sm-10">
+                            <label for="staticName" class="col-md-3 col-form-label">Name:</label>
+                            <div class="col-md-9">
                                 <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= @project.name %>">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDescription" class="col-sm-2 col-form-label">Description:</label>
-                            <div class="col-sm-10">
+                            <label for="staticDescription" class="col-md-3 col-form-label">Description:</label>
+                            <div class="col-md-9">
                                 <input type="text" readonly class="form-control-plaintext" id="staticDescription" value="<%= @project.description %>">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticStatus" class="col-sm-2 col-form-label">Status:</label>
-                            <div class="col-sm-10">
-                                <% if @project.status == 1 %>
-                                <h4><span class="card-text badge badge-primary">Developing</span></h4>
-                                <% elsif @project.status == 2 %>
-                                <h4><span class="cart-text text-white badge badge-warning">Stand by</span></h4>
+                            <label for="staticStatus" class="col-md-3 col-form-label">Status:</label>
+                            <div class="col-md-9">
+                                <% if @project.project_status_id == 1 %>
+                                <h4><span class="card-text badge badge-danger">Stand-by</span></h4>
+                                <% elsif @project.project_status_id == 2 %>
+                                <h4><span class="cart-text text-white badge badge-warning">Developing</span></h4>
                                 <% else %>
                                 <h4><span class="card-text badge badge-success">Finished</span></h4>
                                 <% end %>
@@ -93,7 +94,11 @@
                         </div>
                     </form>
                 </div>
+                <div class="card-footer">
+                    <button class="btn btn-dark float-right" data-toggle="modal" data-target="#updateInformation">UPDATE INFORMATION</button>
+                </div>
             </div>
+            <% if @tasks.size > 0 %>
             <div class="card border-dark mb-3">
                 <div class="card-header text-white bg-dark">TASKS</div>
                 <div class="card-body">
@@ -105,11 +110,33 @@
                     </div>
                 </div>
             </div>
+            <% end %>
+        </div>
+        <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="nav-members-tab">
+            <div class="card border-dark mb-3">
+                <div class="card-header text-white bg-dark">TEAM MEMBERS</div>
+                <div class="card-body">
+                    <% @users.each do |user| %>
+                    <ul class="list-unstyled">
+                        <li class="media">
+                            <%= image_tag("avatar-image.png", alt: "Member", size: '64', class: "mr-3") %>
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1"><%= user.email %></h5>
+                                <%= user.email %>
+                            </div>
+                        </li>
+                    </ul>
+                    <% end %>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-dark float-right" data-toggle="modal" data-target="#addMember">ADD MEMBER</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal / Create task -->
 <div class="modal fade" id="createTask" tabindex="-1" role="dialog" aria-labelledby="createTaskLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -127,10 +154,58 @@
                 <%= f.collection_select :user_id, User.where.not(id: current_user.id).order(:email),:id,:email, {}, class: "form-control" %><br />
                 <%= f.label :description %>
                 <%= f.text_area :description, class: "form-control" %><br />
+                <%= f.label :task_status %>
                 <%= f.collection_select :task_status_id, TaskStatus.all.order(:id),:id,:name, {}, class: "form-control" %><br />
                 <%= f.hidden_field :user_id, value: current_user.id %><br />
                 <%= f.hidden_field :project_id, value: params[:id] %><br />
                 <%= f.submit 'CREATE', class: 'btn btn-success' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal / Change status -->
+<div class="modal fade" id="updateInformation" tabindex="-1" role="dialog" aria-labelledby="updateInformationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateInformationLabel">CHANGE PROJECT STATUS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= form_for @project, :url => url_for(:controller => 'projects', :action => 'update') do |f| %>
+                <%= f.label :name %>
+                <%= f.text_field :name, value: "#{@project.name}", class: "form-control" %><br />
+                <%= f.label :description %>
+                <%= f.text_area :description, value: "#{@project.description}", class: "form-control" %><br />
+                <%= f.label :status %>
+                <%= f.collection_select :project_status_id, ProjectStatus.all.order(:id),:id,:name, {:selected => "#{@project.project_status_id}"}, class: "form-control" %><br />
+                <%= f.submit 'UPDATE', class: 'btn btn-success' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal / Add member -->
+<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="addMemberLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMemberLabel">ADD MEMBER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= form_for ProjectRelationship.new, :url => url_for(:controller => 'project_relationships', :action => 'create') do |f| %>
+                <%= f.label :user %>
+                <%= f.collection_select :user_id, User.all.order(:email),:id,:email, {}, class: "form-control" %><br />
+                <%= f.hidden_field :project_id, value: params[:id] %><br />
+                <%= f.submit 'ADD', class: 'btn btn-success' %>
                 <% end %>
             </div>
         </div>

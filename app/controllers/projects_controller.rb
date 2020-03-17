@@ -11,5 +11,16 @@ class ProjectsController < ApplicationController
     @tasks_to_do = Task.to_do(params[:id])
     @tasks_doing = Task.doing(params[:id])
     @tasks_done = Task.done(params[:id])
+    @users = User.from_this_project(params[:id])
+  end
+
+  def update
+    Project.update_project(project_params)
+  end
+
+  private
+
+  def project_params
+    params.require(:project).permit(:name, :description, :project_status_id)
   end
 end

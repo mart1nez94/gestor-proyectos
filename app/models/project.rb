@@ -10,4 +10,8 @@ class Project < ApplicationRecord
   def self.project_by_id(project_id)
     Project.all.find_by(id: project_id)
   end
+
+  def self.update_project(project_params)
+    Project.update(project_params)
+  end
 end
