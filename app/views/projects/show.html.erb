@@ -17,11 +17,12 @@
                             <% @tasks_to_do.each do |task| %>
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <h6 class="mb-1"><b><%= task.name %></b></h6>
                                     <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted"><%= task.email %></small>
+                                <small class="text-muted"><%= task.email %></small><br /><br />
+                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-danger btn-sm w-100', id: task.id %>
                             </div>
                             <% end %>
                         </div>
@@ -34,11 +35,12 @@
                             <% @tasks_doing.each do |task| %>
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <h6 class="mb-1"><b><%= task.name %></b></h6>
                                     <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted"><%= task.email %></small>
+                                <small class="text-muted"><%= task.email %></small><br /><br />
+                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-warning btn-sm w-100', id: task.id %>
                             </div>
                             <% end %>
                         </div>
@@ -51,11 +53,12 @@
                             <% @tasks_done.each do |task| %>
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <h6 class="mb-1"><b><%= task.name %></b></h6>
                                     <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.updated_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted"><%= task.email %></small>
+                                <small class="text-muted"><%= task.email %></small><br /><br />
+                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-success btn-sm w-100', id: task.id %>
                             </div>
                             <% end %>
                         </div>
