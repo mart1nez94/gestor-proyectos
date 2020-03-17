@@ -7,15 +7,18 @@ class Task < ApplicationRecord
   end
 
   def self.to_do(project_id)
-    Task.all.where(tasks: {project_id: project_id, task_status_id: 1}).order("tasks.created_at DESC")
+    Task.all.joins(:user).where(tasks: {project_id: project_id, task_status_id: 1})
+      .select("tasks.*, users.email").order("tasks.created_at DESC")
   end
 
   def self.doing(project_id)
-    Task.all.where(tasks: {project_id: project_id, task_status_id: 2}).order("tasks.created_at DESC")
+    Task.all.joins(:user).where(tasks: {project_id: project_id, task_status_id: 2})
+      .select("tasks.*, users.email").order("tasks.created_at DESC")
   end
 
   def self.done(project_id)
-    Task.all.where(tasks: {project_id: project_id, task_status_id: 3}).order("tasks.created_at DESC")
+    Task.all.joins(:user).where(tasks: {project_id: project_id, task_status_id: 3})
+      .select("tasks.*, users.email").order("tasks.created_at DESC")
   end
 
   def self.create(task_params)

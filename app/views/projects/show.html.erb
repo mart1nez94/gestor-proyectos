@@ -17,10 +17,10 @@
                             <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
-                                    <small class="text-muted"><%= task.created_at %></small>
+                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                <small class="text-muted"><%= task.email %></small>
                             </a>
                             <% end %>
                         </div>
@@ -34,10 +34,10 @@
                             <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
-                                    <small class="text-muted"><%= task.created_at %></small>
+                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                <small class="text-muted"><%= task.email %></small>
                             </a>
                             <% end %>
                         </div>
@@ -51,10 +51,10 @@
                             <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><%= task.name %></h6>
-                                    <small class="text-muted"><%= task.created_at %></small>
+                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
-                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                <small class="text-muted"><%= task.email %></small>
                             </a>
                             <% end %>
                         </div>
@@ -127,7 +127,7 @@
                 <%= f.collection_select :user_id, User.where.not(id: current_user.id).order(:email),:id,:email, {}, class: "form-control" %><br />
                 <%= f.label :description %>
                 <%= f.text_area :description, class: "form-control" %><br />
-                <%= f.collection_select :status_id, TaskStatus.all.order(:id),:id,:name, {}, class: "form-control" %><br />
+                <%= f.collection_select :task_status_id, TaskStatus.all.order(:id),:id,:name, {}, class: "form-control" %><br />
                 <%= f.hidden_field :user_id, value: current_user.id %><br />
                 <%= f.hidden_field :project_id, value: params[:id] %><br />
                 <%= f.submit 'CREATE', class: 'btn btn-success' %>
