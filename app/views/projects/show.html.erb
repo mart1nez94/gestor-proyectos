@@ -1,122 +1,108 @@
 <div class="container">
-    <div class="card border-dark mb-3">
-        <h4 class="card-header text-white bg-dark"><%= "#{@project.name.upcase}'S MENU" %></h4>
-        <div class="card-body">
-            <button type="button" class="btn btn-dark btn-lg btn-block">NEW TASK</button>
-            <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#showInformation">INFORMATION</button>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-board-tab" data-toggle="tab" href="#nav-board" role="tab" aria-controls="nav-board" aria-selected="true"><b>BOARD</b></a>
+            <a class="nav-item nav-link" id="nav-information-tab" data-toggle="tab" href="#nav-information" role="tab" aria-controls="nav-information" aria-selected="false"><b>INFORMATION</b></a>
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="card-deck">
-        <div class="card border-danger">
-            <h4 class="card-header text-white bg-danger">TO-DO</h4>
-            <div class="card-body">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
+    </nav>
+    <div class="tab-content" id="nav-tabContent"><br />
+        <div class="tab-pane fade show active" id="nav-board" role="tabpanel" aria-labelledby="nav-board-tab">
+            <div class="card-deck">
+                <div class="card border-danger">
+                    <h4 class="card-header text-white bg-danger text-center">TO-DO</h4>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <% @tasks_to_do.each do |task| %>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <small class="text-muted"><%= task.created_at %></small>
+                                </div>
+                                <p class="mb-1"><%= task.description %></p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <% end %>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
+                    </div>
+                </div>
+                <div class="card border-warning">
+                    <h4 class="card-header text-white bg-warning text-center">DOING</h4>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <% @tasks_doing.each do |task| %>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <small class="text-muted"><%= task.created_at %></small>
+                                </div>
+                                <p class="mb-1"><%= task.description %></p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <% end %>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
+                    </div>
+                </div>
+                <div class="card border-success">
+                    <h4 class="card-header text-white bg-success text-center">DONE</h4>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <% @tasks_done.each do |task| %>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1"><%= task.name %></h6>
+                                    <small class="text-muted"><%= task.created_at %></small>
+                                </div>
+                                <p class="mb-1"><%= task.description %></p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <% end %>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card border-warning">
-            <h4 class="card-header text-white bg-warning">DOING</h4>
-            <div class="card-body">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
+        <div class="tab-pane fade" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
+            <div class="card border-dark mb-3">
+                <div class="card-header text-white bg-dark">GENERAL INFORMATION</div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="staticName" class="col-sm-2 col-form-label">Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= @project.name %>">
+                            </div>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
+                        <div class="form-group row">
+                            <label for="staticDescription" class="col-sm-2 col-form-label">Description:</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="staticDescription" value="<%= @project.description %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticStatus" class="col-sm-2 col-form-label">Status:</label>
+                            <div class="col-sm-10">
+                                <% if @project.status == 1 %>
+                                <h4><span class="card-text badge badge-primary">Developing</span></h4>
+                                <% elsif @project.status == 2 %>
+                                <h4><span class="cart-text text-white badge badge-warning">Stand by</span></h4>
+                                <% else %>
+                                <h4><span class="card-text badge badge-success">Finished</span></h4>
+                                <% end %>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="card border-success">
-            <h4 class="card-header text-white bg-success">DONE</h4>
-            <div class="card-body">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small class="text-muted">3 days ago</small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
+            <div class="card border-dark mb-3">
+                <div class="card-header text-white bg-dark">TASKS</div>
+                <div class="card-body">
+                    <h4 class="text-center">Total tasks: <b><%= @tasks.size %></b></h4>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @tasks_to_do.size * 100 / @tasks.size %>%" aria-valuenow="<%= @tasks_to_do.size * 100 / @tasks.size %>" aria-valuemin="0" aria-valuemax="100"><b><%= @tasks_to_do.size %></b></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: <%= @tasks_doing.size * 100 / @tasks.size %>%" aria-valuenow="<%= @tasks_doing.size * 100 / @tasks.size %>" aria-valuemin="0" aria-valuemax="100"><b><%= @tasks_doing.size %></b></div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: <%= @tasks_done.size * 100 / @tasks.size %>%" aria-valuenow="<%= @tasks_done.size * 100 / @tasks.size %>" aria-valuemin="0" aria-valuemax="100"><b><%= @tasks_done.size %></b></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Show Information -->
-<div class="modal fade" id="showInformation" tabindex="-1" role="dialog" aria-labelledby="showInformationLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showInformationLabel"><%= "#{@project.name.upcase}'S INFORMATION"%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" value="<%= @project.name %>">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" id="description" rows="3"><%= @project.description %></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <% if @project.status == 1 %>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" value="Developing">
-                        <% elsif @project.status == 2 %>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" value="Stand by">
-                        <% else %>
-                        <input type="text" class="form-control" id="name" aria-describedby="name" value="Finished">
-                        <% end %>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
