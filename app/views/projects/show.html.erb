@@ -6,6 +6,7 @@
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent"><br />
+        <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#createTask">ADD NEW TASK</button><br />
         <div class="tab-pane fade show active" id="nav-board" role="tabpanel" aria-labelledby="nav-board-tab">
             <div class="card-deck">
                 <div class="card border-danger">
@@ -103,6 +104,34 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: <%= @tasks_done.size * 100 / @tasks.size %>%" aria-valuenow="<%= @tasks_done.size * 100 / @tasks.size %>" aria-valuemin="0" aria-valuemax="100"><b><%= @tasks_done.size %></b></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createTask" tabindex="-1" role="dialog" aria-labelledby="createTaskLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTaskLabel">CREATE A NEW TASK</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= form_for Task.new, :url => url_for(:controller => 'tasks', :action => 'create') do |f| %>
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control" %><br />
+                <%= f.label :assignment_to %>
+                <%= f.collection_select :user_id, User.where.not(id: current_user.id).order(:email),:id,:email, {}, class: "form-control" %><br />
+                <%= f.label :description %>
+                <%= f.text_area :description, class: "form-control" %><br />
+                <%= f.collection_select :status_id, TaskStatus.all.order(:id),:id,:name, {}, class: "form-control" %><br />
+                <%= f.hidden_field :user_id, value: current_user.id %><br />
+                <%= f.hidden_field :project_id, value: params[:id] %><br />
+                <%= f.submit 'CREATE', class: 'btn btn-success' %>
+                <% end %>
             </div>
         </div>
     </div>

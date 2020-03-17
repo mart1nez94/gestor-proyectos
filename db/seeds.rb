@@ -1,3 +1,12 @@
+TaskStatus.create!( id: 1,
+                    name: "To-Do")
+          
+TaskStatus.create!( id: 2,
+                    name: "Doing")
+          
+TaskStatus.create!( id: 3,
+                    name: "Done")
+                    
 User.create!( email: "armandoomtzz@gmail.com",
               password: "armando")
 
@@ -37,26 +46,30 @@ ProjectRelationship.create!(user_id: 1,
   Task.create!( project_id: 1, 
                 name: "Tarea ##{time}", 
                 description: "Descripcion de la Tarea ##{time}",
-                status_id: 1)
+                user_id: 2,
+                task_status_id: 1)
 end
 
 5.times do |time|
   Task.create!( project_id: 4, 
                 name: "Tarea ##{time}", 
                 description: "Descripcion de la Tarea ##{time}",
-                status_id: 1)
+                user_id: 1,
+                task_status_id: 1)
 end
 
 10.times do |time|
   Task.create!( project_id: 4, 
                 name: "Tarea ##{time}", 
                 description: "Descripcion de la Tarea ##{time}",
-                status_id: 2)
+                user_id: 1,
+                task_status_id: 2)
 end
 
 20.times do |time|
   Task.create!( project_id: 4, 
                 name: "Tarea ##{time}", 
                 description: "Descripcion de la Tarea ##{time}",
-                status_id: 3)
+                user_id: 1,
+                task_status_id: 3)
 end
