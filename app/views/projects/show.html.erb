@@ -18,11 +18,11 @@
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1"><b><%= task.name %></b></h6>
-                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.created_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
+                                    <small class="text-muted"><%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(task.updated_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %></small>
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small><br /><br />
-                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-danger btn-sm w-100', id: task.id %>
+                                <%= link_to "MORE INFORMATION", { controller: "tasks", action: "show", id: task.id }, class: 'btn btn-danger btn-sm w-100' %>
                             </div>
                             <% end %>
                         </div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small><br /><br />
-                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-warning btn-sm w-100', id: task.id %>
+                                <%= link_to "MORE INFORMATION", { controller: "tasks", action: "show", id: task.id }, class: 'btn btn-warning btn-sm w-100' %>
                             </div>
                             <% end %>
                         </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <p class="mb-1"><%= task.description %></p>
                                 <small class="text-muted"><%= task.email %></small><br /><br />
-                                <%= link_to "MORE INFORMATION", { controller: 'tasks', action: 'show' }, class:'btn btn-success btn-sm w-100', id: task.id %>
+                                <%= link_to "MORE INFORMATION", { controller: "tasks", action: "show", id: task.id }, class: 'btn btn-success btn-sm w-100' %>
                             </div>
                             <% end %>
                         </div>
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticStatus" class="col-md-3 col-form-label">Status:</label>
+                            <label for="staticStatus" class="col-md-3 col-form-label">Project Status:</label>
                             <div class="col-md-9">
                                 <% if @project.project_status_id == 1 %>
                                 <h4><span class="card-text badge badge-danger">Stand-by</span></h4>
@@ -168,12 +168,12 @@
     </div>
 </div>
 
-<!-- Modal / Change status -->
+<!-- Modal / Update information -->
 <div class="modal fade" id="updateInformation" tabindex="-1" role="dialog" aria-labelledby="updateInformationLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateInformationLabel">CHANGE PROJECT STATUS</h5>
+                <h5 class="modal-title" id="updateInformationLabel">UPDATE INFORMATION</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -184,7 +184,7 @@
                 <%= f.text_field :name, value: "#{@project.name}", class: "form-control" %><br />
                 <%= f.label :description %>
                 <%= f.text_area :description, value: "#{@project.description}", class: "form-control" %><br />
-                <%= f.label :status %>
+                <%= f.label :project_status %>
                 <%= f.collection_select :project_status_id, ProjectStatus.all.order(:id),:id,:name, {:selected => "#{@project.project_status_id}"}, class: "form-control" %><br />
                 <%= f.submit 'UPDATE', class: 'btn btn-success' %>
                 <% end %>
