@@ -1,0 +1,90 @@
+<div class="container">
+    <%= link_to "GO BACK", { controller: "projects", action: "show", id: @task.project_id }, class: 'btn btn-dark btn-lg btn-block' %>
+</div><br />
+
+<div class="container">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-white bg-dark">TASK INFORMATION</div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="staticName" class="col-md-3 col-form-label">Name:</label>
+                <div class="col-md-9">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= @task.name %>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticDescription" class="col-md-3 col-form-label">Description:</label>
+                <div class="col-md-9">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= @task.description %>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticStatus" class="col-md-3 col-form-label">Status:</label>
+                <div class="col-md-9">
+                    <% if @task.task_status_id == 1 %>
+                    <h4><span class="card-text badge badge-danger">To-Do</span></h4>
+                    <% elsif @task.task_status_id == 2 %>
+                    <h4><span class="cart-text text-white badge badge-warning">Doing</span></h4>
+                    <% else %>
+                    <h4><span class="card-text badge badge-success">Done</span></h4>
+                    <% end %>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticDescription" class="col-md-3 col-form-label">Assigned to:</label>
+                <div class="col-md-9">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= @task.email %>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticDescription" class="col-md-3 col-form-label">Last update:</label>
+                <div class="col-md-9">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" value="<%= ActiveSupport::TimeZone["Central Time (US & Canada)"].parse(@task.updated_at.to_s).utc.to_date.strftime("%m/%^b/%Y")[1..-1] %>">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-dark float-right" data-toggle="modal" data-target="#updateInformation">UPDATE INFORMATION</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-white bg-dark">DELETE TASK</div>
+        <div class="card-body">
+            <span><b>If this task is no longer necessary in the project flow you can delete it ...</b></span>
+        </div>
+        <div class="card-footer">
+            <%= link_to "DELETE TASK", @task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-dark float-right' %>
+        </div>
+    </div>
+</div>
+
+<!-- Modal / Update information -->
+<div class="modal fade" id="updateInformation" tabindex="-1" role="dialog" aria-labelledby="updateInformationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateInformationLabel">UPDATE INFORMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= form_for @task, :url => url_for(:controller => 'tasks', :action => 'update') do |f| %>
+                <%= f.label :name %>
+                <%= f.text_field :name, value: "#{@task.name}", class: "form-control" %><br />
+                <%= f.label :description %>
+                <%= f.text_area :description, value: "#{@task.description}", class: "form-control" %><br />
+                <%= f.label :task_status %>
+                <%= f.collection_select :task_status_id, TaskStatus.all.order(:id),:id,:name, {:selected => "#{@task.task_status_id}"}, class: "form-control" %><br />
+                <%= f.label :assigned_to %>
+                <%= f.collection_select :user_id, User.all.order(:email),:id,:email, {:selected => "#{@task.user_id}"}, class: "form-control" %><br />
+                <%= f.hidden_field :project_id, value: @task.project_id %><br />
+                <%= f.submit 'UPDATE', class: 'btn btn-success' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
