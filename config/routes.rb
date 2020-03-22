@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   root to: "projects#index"
   
   resources :projects, except: [:create, :new, :edit, :destroy]
-  resources :tasks, except: [:index, :new, :edit, :update, :destroy]
+  resources :tasks, except: [:index, :new, :edit]
   resources :project_relationships, except: [:index, :show, :new, :edit, :update, :destroy]
 end

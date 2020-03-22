@@ -11,7 +11,7 @@ class Project < ApplicationRecord
     Project.all.find_by(id: project_id)
   end
 
-  def self.update_project(project_params)
-    Project.update(project_params)
+  def self.update_project(project_id, project_params)
+    Project.find_by(id: project_id).update(project_params)
   end
 end

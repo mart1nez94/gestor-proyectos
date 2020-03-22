@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    Project.update_project(project_params)
+    Project.update_project(params[:id], project_params)
   end
 
   private
