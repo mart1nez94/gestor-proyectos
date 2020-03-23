@@ -12,6 +12,34 @@
 </head>
 
 <body>
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="<%= root_path %>"><b>GESTOR DE PROYECTOS</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <%= link_to "Home", root_path,  class: "nav-link" %>
+                </li>
+            </ul>
+            <ul class="navbar-nav my-2 my-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">User Menu</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                        <h6 class="dropdown-header">User information</h6>
+                        <%= link_to "Edit", edit_user_registration_path,  class: "dropdown-item" %>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Session</h6>
+                        <%= link_to "Sign out", destroy_user_session_path, method: 'delete',  class: "dropdown-item" %>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav><br />
+    <% end %>
     <%= yield %>
 </body>
 
