@@ -14,4 +14,9 @@ class Project < ApplicationRecord
   def self.update_project(project_id, project_params)
     Project.find_by(id: project_id).update(project_params)
   end
+
+  def self.create_project(user_id, project_params)
+    project = Project.create!(project_params)
+    ProjectRelationship.create!(user_id: user_id, project_id: project.id)
+  end
 end
