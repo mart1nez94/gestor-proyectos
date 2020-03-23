@@ -6,7 +6,12 @@ class Task < ApplicationRecord
     Task.all.joins(:user).select("tasks.*, users.email").find_by(id: task_id)
   end
 
-  def self.all_tasks(project_id)
+  def self.all_tasks_by_user(user_id)
+    Task.all.joins(:user).where("tasks.user_id = #{user_id} AND tasks.task_status_id != 3")
+      .select("tasks.*, users.email").order("tasks.updated_at DESC")
+  end
+  
+  def self.all_tasks_by_project(project_id)
     Task.all.joins(:user).where(tasks: {project_id: project_id})
       .select("tasks.*, users.email").order("tasks.updated_at DESC")
   end
