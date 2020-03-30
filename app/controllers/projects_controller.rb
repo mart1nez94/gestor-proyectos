@@ -17,10 +17,14 @@ class ProjectsController < ApplicationController
 
   def create
     Project.create_project(current_user.id, project_params)
+    redirect_to root_path
+    flash[:success] = "Project was created successful!"
   end
 
   def update
     Project.update_project(params[:id], project_params)
+    redirect_to request.referrer
+    flash[:success] = "Project was updated successful!"
   end
 
   private
