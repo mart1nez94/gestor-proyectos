@@ -1,3 +1,9 @@
+<% flash.each do |message_type, message| %>
+<div class="container">
+    <div class="alert alert-success"><%= message %></div>
+</div>
+<% end %>
+
 <div class="container">
     <%= link_to "GO BACK", { controller: "projects", action: "show", id: @task.project_id }, class: 'btn btn-dark btn-lg btn-block' %>
 </div><br />
