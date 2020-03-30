@@ -23,6 +23,8 @@ class ProjectsController < ApplicationController
 
   def update
     Project.update_project(params[:id], project_params)
+    redirect_to request.referrer
+    flash[:success] = "Project was updated successful!"
   end
 
   private
