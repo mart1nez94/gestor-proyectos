@@ -6,6 +6,8 @@ class TasksController < ApplicationController
 
   def create
     Task.create_task(task_params)
+    redirect_to request.referrer
+    flash[:success] = "Task was created successful!"
   end
 
   def update
